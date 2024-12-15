@@ -1,7 +1,8 @@
 /* Global styles */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Geist', sans-serif; /* Default font for body */
+  font-weight: 300;
   background-color: #1353F5;
   color: #ADFF14;
 }
@@ -12,15 +13,24 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 2rem;
+}
+
+h1, .wallpogo__name {
+  font-family: 'Playfair Display', serif; /* Font for headings */
+}
+
+.wallpogo__subtitle, .wallpogo__description {
+  font-family: 'Geist', sans-serif; /* Font for subtitles and descriptions */
 }
 
 .wallpogo__container {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 1200px;
+  max-width: 430px;
+  position: relative;
   width: 100%;
+  z-index: 4;
 }
 
 .wallpogo__content {
@@ -29,62 +39,115 @@ body {
   padding: 2rem;
   border-radius: 24px;
   border: 2px solid #0033B2;
-  background: url('path/to/image') lightgray -72.687px 0px / 133.652% 100% no-repeat, radial-gradient(98.3% 98.3% at 50.12% 1.7%, #0747E7 39.89%, #083BBA 100%);
+  background: radial-gradient(98.3% 98.3% at 50.12% 1.7%, #0747E7 39.89%, #083BBA 100%);
   box-shadow: 0px 4px 13px 0px rgba(102, 145, 255, 0.40) inset, 0px 4px 2px 0px rgba(102, 145, 255, 0.75) inset;
-  animation: fadeInSlideUp 1s ease-out;
+  animation: fadeInSlideUp 0.5s ease-out;
 }
 
 .wallpogo__name {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0 0 5px;
 }
 
 .wallpogo__subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 16px;
+  margin: 0 0 24px;
 }
 
 .wallpogo__description {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  font-size: 16px;
+  margin: 0 0 24px;
 }
 
 .wallpogo__buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .wallpogo__button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
   border-radius: 15px;
   border: 2px solid #002B97;
-  background: url('path/to/image') lightgray -16.826px 0px / 133.652% 100% no-repeat, #1353F5;
+  background: #1353F5;
   box-shadow: 0px 0px 0px 1px #1F5AEC, 0px -5px 8px 0px rgba(0, 41, 142, 0.35) inset, 0px 5px 4px 0px rgba(102, 145, 255, 0.32) inset, 0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset;
-  color: #00298E;
+  height: 100px;
   text-decoration: none;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  width: 100px;
+}
+
+.wallpogo__button,
+.wallpogo__button--email {
+  cursor: pointer;
+}
+
+.wallpogo__button:hover {
+  box-shadow: 0px 0px 0px 1px #1F5AEC, 0px 0px 12px 0px rgba(0, 8, 27, 0.70) inset, 0px 0px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  transition: all 0.3s ease;
+}
+
+.wallpogo__button svg path {
+  transition: all 0.3s ease;
+}
+
+.wallpogo__button svg {
+  overflow: visible;
+}
+
+.wallpogo__button:hover svg path {
+  fill: #CAD9FF;
+  filter: drop-shadow(0px 0px 4px rgba(202, 217, 255, 0.32)) drop-shadow(0px 0px 25px rgba(255, 255, 255, 0.50)) drop-shadow(0px 0px 40px rgba(255, 255, 255, 0.50));
+  transition: all 0.3s ease;
 }
 
 .wallpogo__button--email {
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
+  color: #00298E;
+  gap: 6px;
+  padding: 10px 15px;
+  width: auto;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+.wallpogo__button--email:hover {
+  color: #CAD9FF;
+  box-shadow: 0px 0px 6px 0px rgba(0, 8, 27, 0.80) inset, 0px 0px 0px 1px #1F5AEC;
+  text-shadow: 0px 0px 40px rgba(255, 255, 255, 0.50), 0px 0px 25px rgba(255, 255, 255, 0.50), 0px 0px 4px rgba(202, 217, 255, 0.32);
+  transition: all 0.3s ease;
+}
+
+.wallpogo__button--email span {
+  display: flex;
 }
 
 .wallpogo__or-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   margin: 0 1rem;
+  width: 100%;
+}
+
+.wallpogo__or-container .wallpogo__or-line {
+  border-bottom: 1px solid #215DF6;
+  background: #00288C;
+  height: 1.1px;
+  width: 100%;
 }
 
 .wallpogo__or {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
+  color: #00298E;
 }
 
 .wallpogo__social-buttons {
@@ -93,7 +156,6 @@ body {
 }
 
 .wallpogo__button--social {
-  padding: 1rem;
   font-size: 1.2rem;
 }
 
@@ -104,15 +166,51 @@ body {
 }
 
 .wallpogo__image {
+  bottom: 0;
   flex: 1;
+  display: flex;
   max-width: 50%;
   opacity: 0;
-  animation: fadeIn 1s ease-out 0.5s forwards;
+  mix-blend-mode: overlay;
+  right: 75px;
+  animation: fadeIn 0.7s ease-out 0.5s forwards;
+  position: absolute;
+  z-index: 2;
 }
 
 .wallpogo__image img {
   width: 100%;
   height: auto;
+  opacity: 0.7;
+  filter: grayscale(1);
+}
+
+.wallpogo__footer {
+  animation: fadeIn 0.5s ease-out 0.3s forwards;
+  bottom: 5px;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+}
+
+.wallpogo__footer__content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.wallpogo__footer-light {
+  border-radius: 50%;
+  border: 1px solid #D3FF81;
+  background: radial-gradient(85.71% 85.71% at 50% 14.29%, #ADFF14 27.13%, #243504 100%), #D9D9D9;
+  box-shadow: 0px 0px 26.46px 0px #ADFF14, 0px 0px 15.12px 0px #ADFF14, 0px 0px 8.82px 0px #ADFF14, 0px 0px 4.41px 0px #ADFF14, 0px 0px 1.26px 0px #ADFF14, 0px 0px 0.63px 0px #ADFF14;
+  height: 7px;
+  margin-right: 8px;
+  width: 7px;
+}
+
+.wallpogo__footer-text {
+  font-size: 10px;
 }
 
 /* Responsive styles */
@@ -129,6 +227,12 @@ body {
 
   .wallpogo__image {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 1480px) {
+  .wallpogo__image img {
+    max-width: 270px;
   }
 }
 
