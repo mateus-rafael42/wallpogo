@@ -11,4 +11,4 @@ const splashScreen = document.querySelector('.splash-screen');
 // Set a timeout to add the hidden class after 4.5 seconds
 setTimeout(() => {
   splashScreen.classList.add('hidden'); // Add the hidden class after the total animation time
-}, 4500); // 4.5 seconds in milliseconds
+}, 4300); // 4.5 seconds in milliseconds
