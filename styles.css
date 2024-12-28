@@ -223,6 +223,12 @@ h1, .wallpogo__name {
 
   .splash-screen {
     display: none;
+    padding: 0 20px;
+  }
+
+  .splash-screen-img {
+    max-width: 656px;
+    width: 100%;
   }
 
   .wallpogo {
@@ -271,7 +277,8 @@ h1, .wallpogo__name {
   .wallpogo__subtitle,
   .wallpogo__description,
   .wallpogo__button--email,
-  .wallpogo__or {
+  .wallpogo__or,
+  .splash-screen-text {
     font-size: 14px;
   }
 }
