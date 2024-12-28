@@ -288,7 +288,7 @@ h1, .wallpogo__name {
 
 .splash-screen {
   align-items: center;
-  animation: fadeOut 800s ease-out 3.2s 1 forwards;
+  animation: fadeOut 800ms ease-out 3.2s 1 forwards;
   display: flex;
   justify-content: center;
   flex-direction: column;
