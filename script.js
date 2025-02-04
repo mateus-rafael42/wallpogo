@@ -1,12 +1,12 @@
 // script.js
-const emailButton = document.querySelector('.wallpogo__button--email');
+// const emailButton = document.querySelector('.wallpogo__button--email');
 
-emailButton.addEventListener('click', () => {
-  window.location.href = 'mailto:mateus.rafael.ufpr@gmail.com';
-});
+// emailButton.addEventListener('click', () => {
+//   window.location.href = 'mailto:mateus.rafael.ufpr@gmail.com';
+// });
 
 // Assuming you have a reference to the splash screen element
-const splashScreen = document.querySelector('.splash-screen');
+const splashScreen = document.querySelector('.main-splash-screen');
 
 // Set a timeout to add the hidden class after 4.5 seconds
 setTimeout(() => {

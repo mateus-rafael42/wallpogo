@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <title>wallpogo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body.work .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        body.work .splash-screen.visible {
+            opacity: 1;
+        }
+
+        body.work .splash-screen.fade-out {
+            opacity: 0;
+        }
+
+        .splash-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .splash-image.visible {
+            opacity: 1;
+        }
+
+        .loading-box {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 8px 16px;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        .loading-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loading-text {
+            color: #fff;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        .loading-dots {
+            display: inline-block;
+            width: 24px;
+        }
+
+        @keyframes dots {
+            0% { content: ''; }
+            25% { content: '.'; }
+            50% { content: '..'; }
+            75% { content: '...'; }
+            100% { content: ''; }
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        .content {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .content.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="work">
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <img src="./work-splash-screen.png" alt="Loading Background" class="splash-image">
+        <div class="loading-box">
+            <span class="loading-text">Loading</span>
+            <span class="loading-dots"></span>
+        </div>
+    </div>
+    <div class="content backpack">
+        <h1 class="backpack__title">BACKPACK</h1>
+        
+        <div class="backpack__grid">
+            <!-- Grid items will be populated by JavaScript -->
+        </div>
+
+        <div class="backpack__pagination">
+            <!-- Pagination buttons will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="itemModal">
+        <div class="modal__content">
+            <div class="modal__left">
+                <div style="position: relative;">
+                    <div class="loading-spinner"></div>
+                    <img src="/placeholder.svg" alt="Selected project" class="modal__main-image">
+                </div>
+                <div class="modal__thumbnails">
+                    <!-- Thumbnails will be populated by JavaScript -->
+                </div>
+            </div>
+            <div class="modal__right">
+                <h2 class="modal__title">NEN</h2>
+                <p class="modal__subtitle">Brand / Visual Identity / UI UX</p>
+                <p class="modal__description">
+                    Crypto ipsum bitcoin ethereum dogecoin litecoin. Terra secret ICON monero celsius fantom algorand polygon tezos. Quant ICON solana XRP amp ipsum kadena IOTA secret ICON. BitTorrent dogecoin livepeer monero zcash klaytn loopring WAX loopring flow. Elrond serum flow monero maker kadena zcash avalanche.
+                </p>
+                <a class="modal__button" style="display: none;">Check full project</a> <!-- Initially hidden -->
+            </div>
+            <button class="modal__close">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.querySelector('.splash-screen');
+            const splashImage = document.querySelector('.splash-image');
+            const loadingBox = document.querySelector('.loading-box');
+            const content = document.querySelector('.content');
+
+            // Fade in splash screen
+            setTimeout(() => {
+                splashScreen.classList.add('visible');
+                splashImage.classList.add('visible');
+                loadingBox.classList.add('visible');
+            }, 100);
+
+            // Fade out splash screen and show content
+            setTimeout(() => {
+                splashScreen.classList.add('fade-out');
+                content.classList.add('visible');
+
+                // Remove splash screen after fade out
+                splashScreen.addEventListener('transitionend', () => {
+                    splashScreen.remove();
+                }, { once: true });
+            }, 2000); // Adjust this time as needed
+        });
+        // Sample data for the grid items
+        const gridData = [
+            { 
+                id: 1, 
+                image: 'clym-1.png', 
+                color: 'blue', 
+                title: 'Clym',
+                subtitle: 'Branding / Visual Identity',
+                description: 'This project was about designing a brand that feels like a tool for transformation. It’s not just about tech; it’s about giving people the means to overcome challenges and build something better. Creating a design that inspires confidence and connects people to their future—that’s the kind of work that was done here.',
+                carouselImages: [
+                    'clym-1.png',
+                    'clym-2.png',
+                    'clym-3.png',
+                    'clym-4.png',
+                    'clym-5.png'
+                ],
+                showButton: true,
+                link: 'https://www.behance.net/gallery/209092731/Clym' // Unique link for this item
+            },
+            { 
+                id: 2, 
+                image: 'doric-1.png', 
+                color: 'blue', 
+                title: 'Doric',
+                subtitle: 'Visual Identity / Front-end / UI UX',
+                description: 'This project focused on creating a website that embodies elegance and sophistication, showcasing technology at its finest. By using dark tones as a neutral base, complemented by vibrant gradients, we achieved a modern aesthetic. The interactive design allows users to explore products effortlessly through simple gestures. Understanding the audience was crucial; we identified their needs and crafted a solution that reflects Doric’s innovation and quality—responsible design in action.',
+                carouselImages: [
+                    'doric-1.png',
+                    'doric-2.png',
+                    'doric-3.png',
+                    'doric-4.png',
+                    'doric-5.png'
+                ],
+                showButton: false,
+                link: 'https://www.behance.net/gallery/172476561/Doric-Website-UIUX' // Unique link for this item
+            },
+            { 
+                id: 3, 
+                image: 'cooking-1.png', // Replace with the actual image path
+                color: 'yellow', 
+                title: "Cookin' DAO",
+                subtitle: 'Front-end / UI UX',
+                description: 'Cookin’Dao’s website is all about making a strong impression while connecting with users. I dove deep into understanding their needs, which led to vibrant design choices like the playful pink and green palette. The versatile Outfit font keeps things fresh, and intuitive navigation ensures everyone has a great experience. It’s about creating something that’s not just pretty but truly engaging and effective.',
+                carouselImages: [
+                    'cooking-1.png', // Replace with actual carousel image paths
+                    'cooking-2.png',
+                    'cooking-3.png',
+                    'cooking-4.png',
+                    'cooking-5.png'
+                ],
+                showButton: true,
+                link: 'https://www.behance.net/gallery/159628793/Cookin-DAO' // Unique link for this item
+            },
+            { 
+                id: 4, 
+                image: 'nen-1.png', // Replace with the actual image path
+                color: 'purple', 
+                title: 'NEN',
+                subtitle: 'Brand / Visual Identity / UI UX',
+                description: "NEN is a creative agency built on passion, individuality, and transformation. The bold red reflects its energy, while custom typography showcases its unique personality. The website extends this vision, with navigation inspired by Hunter X Hunter’s alphabet and dynamic interactions on every page. It’s not just design—it’s a celebration of creativity, connecting NEN’s values with its audience in every detail.",
+                carouselImages: [
+                    'nen-1.png', // Replace with actual carousel image paths
+                    'nen-2.png',
+                    'nen-3.png',
+                    'nen-4.png',
+                    'nen-5.png'
+                ],
+                showButton: true,
+                link: 'https://www.behance.net/gallery/182518067/NEN' // Unique link for this item
+            },
+            { 
+                id: 5, 
+                image: 'bless-1.png', // Replace with the actual image path
+                color: 'blue', 
+                title: 'Bless',
+                subtitle: 'Brand / Visual Identity / Front-end / UI UX',
+                description: 'This project centered on designing a sleek NFT access card and an intuitive software experience. The black and gray tones highlighted vibrant blue and yellow accents, creating a futuristic, spell-like aesthetic. The logo, with its abstract symmetry, evokes salvation and remains versatile across applications. The website combines elegance with functionality, showcasing features through unique visuals. UX research ensured intuitive layouts and natural button placement for a seamless user experience.',
+                carouselImages: [
+                    'bless-1.png', // Replace with actual carousel image paths
+                    'bless-2.png',
+                    'bless-3.png',
+                    'bless-4.png',
+                    'bless-5.png'
+                ],
+                showButton: true,
+                link: 'https://www.behance.net/gallery/143961115/BlessAIO-Identity-UI' // Unique link for this item
+            },
+            { 
+                id: 6, 
+                image: 'jupter-1.png', // Replace with the actual image path
+                color: 'orange', 
+                title: 'Jupter',
+                subtitle: 'Front-end / UI UX',
+                description: "Jupter’s website embodies its mission to empower entrepreneurs and investors in Brazil's fundraising landscape. The design features a futuristic, glowing aesthetic with a dark theme that highlights the tagline 'Find, Fund, Launch.' A striking glowing planet sets the backdrop, while key statistics emphasize the network's strength, including the number of investors and assets managed. Testimonials from industry leaders add credibility, reinforcing Jupter as an essential resource for navigating fundraising challenges. Every element reflects a community-driven vision for success.",
+                carouselImages: [
+                    'jupter-1.png', // Replace with actual carousel image paths
+                    'jupter-2.png',
+                    'jupter-3.png',
+                    'jupter-4.png',
+                    'jupter-5.png'
+                ],
+                showButton: false,
+                link: 'https://example.com/clym' // Unique link for this item
+            },
+        ];
+
+        const ITEMS_PER_PAGE = 21; // 7 columns × 3 rows
+        const TOTAL_PAGES = 5;
+        let currentPage = 1;
+
+        // Function to create grid items
+        function createGridItems(page) {
+            const grid = document.querySelector('.backpack__grid');
+            grid.innerHTML = '';
+
+            const startIndex = (page - 1) * ITEMS_PER_PAGE;
+            const items = gridData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+            // Create filled slots
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = `backpack__item backpack__item--filled backpack__item--${item.color}`;
+                
+                const loadingSpinner = document.createElement('div');
+                loadingSpinner.className = 'loading-spinner';
+                div.appendChild(loadingSpinner);
+
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.title;
+                img.onload = () => {
+                    setTimeout(() => {
+                        img.classList.add('loaded');
+                        loadingSpinner.remove();
+                    }, 100);
+                };
+                div.appendChild(img);
+                grid.appendChild(div);
+            });
+
+            // Fill remaining slots with empty items
+            const remainingSlots = ITEMS_PER_PAGE - items.length;
+            for (let i = 0; i < remainingSlots; i++) {
+                const div = document.createElement('div');
+                div.className = 'backpack__item';
+                grid.appendChild(div);
+            }
+        }
+
+        // Function to create pagination
+        function createPagination() {
+            const pagination = document.querySelector('.backpack__pagination');
+            pagination.innerHTML = '';
+
+            for (let i = 1; i <= TOTAL_PAGES; i++) {
+                const button = document.createElement('button');
+                button.className = `backpack__page ${i === currentPage ? 'backpack__page--active' : ''}`;
+                button.textContent = i;
+                button.onclick = () => {
+                    currentPage = i;
+                    updatePage();
+                };
+                pagination.appendChild(button);
+            }
+        }
+
+        // Function to update the page
+        function updatePage() {
+            createGridItems(currentPage);
+            createPagination();
+        }
+
+        // Initialize the page
+        updatePage();
+
+        // Modal functionality
+        const modal = document.getElementById('itemModal');
+        const closeBtn = document.querySelector('.modal__close');
+        const mainImage = document.querySelector('.modal__main-image');
+        const thumbnailsContainer = document.querySelector('.modal__thumbnails');
+
+
+        // Add click event to items
+        document.addEventListener('click', (e) => {
+            const itemElement = e.target.closest('.backpack__item--filled');
+            if (itemElement) {
+                const index = Array.from(document.querySelectorAll('.backpack__item--filled')).indexOf(itemElement);
+                const item = gridData[index];
+                
+                if (item) {
+                    const loadingSpinner = document.querySelector('.modal .loading-spinner');
+                    modal.style.display = 'block';
+                    setTimeout(() => modal.classList.add('visible'), 10);
+
+                    // Update modal content
+                    document.querySelector('.modal__title').textContent = item.title;
+                    document.querySelector('.modal__subtitle').textContent = item.subtitle;
+                    document.querySelector('.modal__description').textContent = item.description;
+
+                    // Set the button visibility based on the item's showButton property
+                    const modalButton = document.querySelector('.modal__button');
+                    if (item.showButton) {
+                        modalButton.style.display = 'block'; // Show the button
+                        modalButton.setAttribute('onclick', `window.location.href='${item.link}'`); // Set unique link
+                    } else {
+                        modalButton.style.display = 'none'; // Hide the button
+                    }
+
+                    // Update main image
+                    mainImage.src = item.carouselImages[0];
+                    mainImage.onload = () => {
+                        mainImage.classList.add('loaded');
+                        loadingSpinner.remove();
+                    };
+
+                    // Update thumbnails
+                    thumbnailsContainer.innerHTML = '';
+                    item.carouselImages.forEach((imgSrc, i) => {
+                        const thumb = document.createElement('div');
+                        thumb.className = `modal__thumbnail ${i === 0 ? 'modal__thumbnail--active' : ''}`;
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        img.alt = `${item.title} - Image ${i + 1}`;
+                        thumb.appendChild(img);
+                        thumbnailsContainer.appendChild(thumb);
+                    });
+
+                    // Reattach thumbnail click events
+                    const thumbnails = document.querySelectorAll('.modal__thumbnail');
+                    thumbnails.forEach((thumb, index) => {
+                        thumb.addEventListener('click', () => {
+                            const loadingSpinner = document.querySelector('.modal .loading-spinner');
+                            if (loadingSpinner) loadingSpinner.remove();
+                            
+                            thumbnails.forEach(t => t.classList.remove('modal__thumbnail--active'));
+                            thumb.classList.add('modal__thumbnail--active');
+                            mainImage.classList.remove('loaded');
+                            mainImage.src = item.carouselImages[index];
+                            mainImage.onload = () => {
+                                mainImage.classList.add('loaded');
+                            };
+                        });
+                    });
+                }
+            }
+        });
+
+        // Close modal functions
+        function closeModal() {
+            modal.classList.remove('visible');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                mainImage.classList.remove('loaded');
+                thumbnailsContainer.innerHTML = ''; // Clear thumbnails when closing
+            }, 300);
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+            if (modal.style.display === 'block') {
+                if (e.key === 'ArrowLeft') {
+                    // Previous image logic
+                }
+                if (e.key === 'ArrowRight') {
+                    // Next image logic
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
