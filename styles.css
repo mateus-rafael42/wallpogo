@@ -775,3 +775,50 @@ body.work {
   }
 }
 
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .backpack__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal__content {
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px 15px 20px;
+  }
+
+  .modal__left {
+    margin-right: 0;
+    padding: 10px;
+  }
+
+  .modal__right {
+    width: auto;
+  }
+}
+
+/* Responsive Modal Styles */
+.modal__content {
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+.modal__main-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.modal__thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.modal__thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
