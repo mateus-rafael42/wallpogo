@@ -78,9 +78,10 @@ body.work a,
 
 h1, .wallpogo__name {
   font-family: 'Playfair Display', serif; /* Font for headings */
+  letter-spacing: 0.5px;
 }
 
-.wallpogo__subtitle, .wallpogo__description {
+.wallpogo__subtitle, .wallpogo__description, .wallpogo__footer-text {
   font-family: 'Geist', sans-serif; /* Font for subtitles and descriptions */
 }
 
@@ -289,6 +290,7 @@ h1, .wallpogo__name {
 }
 
 .wallpogo__footer-text {
+
   font-size: 10px;
 }
 
